@@ -16,6 +16,17 @@ response = client.search(
     }
 )
 
+# 模拟数据存储在内存中的词条搜索次数字典
+search_data = {
+    '词条1': 10,
+    '词条2': 5,
+    '词条3': 8,
+    '词条4': 3,
+    '词条5': 6,
+    '词条6': 2,
+}
+
+
 # Todo: 首页展示随机500条数据
 class IndexView(View):
     def get(self):
@@ -23,20 +34,27 @@ class IndexView(View):
             index="jobs",
             body={
                 "query": {
-                "match_all": {}
+                    "match_all": {}
                 },
                 "size": 500
             }
         )
         results = response["hits"]["hits"]
         i = 0
-        data={}
+        data = {}
         for info in results:
             data[i] = info["_source"]
             i = i + 1
-        return JsonResponse(data,json_dumps_params={'ensure_ascii': False})
+        return JsonResponse(data, json_dumps_params={'ensure_ascii': False})
 
-# Todo: 热门搜索词条返回数据
+
+# 热门搜索词条返回数据
+def get_top_searches():
+    # 获取搜索次数最多的5个词条
+    top_searches = sorted(search_data.items(), key=lambda x: x[1], reverse=True)[:5]
+    response_data = {key: value for key, value in top_searches}
+
+    return JsonResponse(response_data)
 
 # Todo: 搜索词条返回数据
 

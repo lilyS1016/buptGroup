@@ -19,5 +19,6 @@ from dataProcess.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index', IndexView.as_view())
+    path('index', IndexView.as_view()),
+    path('top-searches/', get_top_searches, name='top_searches'),
 ]
