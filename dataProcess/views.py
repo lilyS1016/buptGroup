@@ -18,12 +18,12 @@ response = client.search(
 
 # 模拟数据存储在内存中的词条搜索次数字典
 search_data = {
-    '词条1': 10,
-    '词条2': 5,
-    '词条3': 8,
-    '词条4': 3,
-    '词条5': 6,
-    '词条6': 2,
+    '后端开发': 10,
+    '前端': 5,
+    '算法工程师': 8,
+    '嵌入式开发': 2,
+    'Java实习生': 6,
+    '数据分析': 4,
 }
 
 
@@ -54,7 +54,7 @@ def get_top_searches(request):
     top_searches = sorted(search_data.items(), key=lambda x: x[1], reverse=True)[:5]
     response_data = {key: value for key, value in top_searches}
 
-    return JsonResponse(response_data)
+    return JsonResponse(response_data, json_dumps_params={'ensure_ascii': False})
 
 # Todo: 搜索词条返回数据
 
