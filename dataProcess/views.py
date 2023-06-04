@@ -49,7 +49,7 @@ class IndexView(View):
 
 
 # 热门搜索词条返回数据
-def get_top_searches():
+def get_top_searches(request):
     # 获取搜索次数最多的5个词条
     top_searches = sorted(search_data.items(), key=lambda x: x[1], reverse=True)[:5]
     response_data = {key: value for key, value in top_searches}
