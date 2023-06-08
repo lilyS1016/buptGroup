@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index', IndexView.as_view()),
     path('top-searches/', get_top_searches, name='top_searches'),
+    path('search/', get_searched_data),
 ]
